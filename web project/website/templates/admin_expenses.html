@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Expense Requests{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">IT Expense Requests</h2>
+
+{% if requests %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Branch</th>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Expense Month</th>
+                <th>Approver</th>
+                <th>Letter</th>
+                <th>Date Submitted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}
+            <tr>
+                <td>{{ req.id }}</td>
+                <td>{{ req.branch }}</td>
+                <td>{{ req.item }}</td>
+                <td>{{ req.description }}</td>
+                <td>Rs. {{ '{:,.2f}'.format(req.amount) }}</td>
+                <td>{{ req.expense_month or 'N/A' }}</td>
+                <td>{{ req.approver }}</td>
+                <td>
+                    <a href="{{ url_for('static', filename='uploads/' ~ req.letter_filename) }}" target="_blank">
+                        View Letter
+                    </a>
+                </td>
+                <td>{{ req.date_submitted.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No expense requests found.</p>
+{% endif %}
+{% endblock %}

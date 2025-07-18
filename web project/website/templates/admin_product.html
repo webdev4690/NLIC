@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Asset Requests{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Asset/Product Request Table</h2>
+
+{% if requests %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Branch</th>
+                <th>Asset Name</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Approver</th>
+                <th>Old Condition</th>
+                <th>Old Location</th>
+                <th>Old Code</th>
+                <th>Quantity</th>
+                <th>Attachment</th>
+                <th>Date Requested</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}
+            <tr>
+                <td>{{ req.id }}</td>
+                <td>{{ req.branch }}</td>
+                <td>{{ req.asset_name }}</td>
+                <td>{{ req.description }}</td>
+                <td>{{ req.amount if req.amount else 'N/A' }}</td>
+                <td>{{ req.approver }}</td>
+                <td>{{ req.old_condition or 'N/A' }}</td>
+                <td>{{ req.old_location or 'N/A' }}</td>
+                <td>{{ req.old_code or 'N/A' }}</td>
+                <td>{{ req.quantity }}</td>
+                <td>
+                    {% if req.attachment %}
+                        <a href="{{ url_for('static', filename='uploads/' ~ req.attachment) }}" target="_blank">View</a>
+                    {% else %}
+                        No File
+                    {% endif %}
+                </td>
+                <td>{{ req.date_requested.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No asset requests found.</p>
+{% endif %}
+{% endblock %}

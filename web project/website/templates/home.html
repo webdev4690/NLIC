@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <h1 class="mb-4">Welcome to the IT Department Portal!</h1>
+    <p class="lead">Use the navigation bar to access IT department services.</p>
+
+    <div class="row mt-5 justify-content-center g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">IT Expenses</h5>
+                    <p class="card-text">Submit department expenses.</p>
+                    <a href="{{ url_for('views.expenses') }}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Product Request</h5>
+                    <p class="card-text">Request new IT equipment.</p>
+                    <a href="{{ url_for('views.product') }}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">IT Support</h5>
+                    <p class="card-text">Create and manage support tickets.</p>
+                    <a href="{{ url_for('views.support') }}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Asset Details</h5>
+                    <p class="card-text">View and manage IT assets.</p>
+                    <a href="{{ url_for('views.assets') }}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Daily Logs</h5>
+                    <p class="card-text">Upload and view daily logs.</p>
+                    <a href="{{ url_for('views.logs') }}" class="btn btn-primary">Go</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

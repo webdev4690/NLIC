@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}IT Assets Maintenance Requisition Form{% endblock %}
+
+{% block content %}
+<div class="asset-form container">
+        <div class="text-center mb-4">
+            <h3 class="mt-3">IT Assets Maintenance Requisition Form</h3>
+        </div>
+        <form method="POST" action="{{ url_for('views.expenses') }}" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="branch" class="form-label">Branch Name</span></label>
+                <select class="form-select" id="branch" name="branch" required>
+                    <option value="">Select an option</option>
+                    {% for branch in branches %}
+                        <option value="{{ branch }}">{{ branch }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="item" class="form-label">Item Name</span></label>
+                <select class="form-select" id="item" name="item" required>
+                    <option value="">Select an option</option>
+                    {% for asset in assets %}
+                    <option value="{{ asset }}">{{ asset }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" class="form-control" id="amount" name="amount" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="expense_month" class="form-label">Cartridge Expense Month</label>
+                <input type="month" class="form-control" id="expense_month" name="expense_month">
+            </div>
+
+            <div class="mb-3">
+                <label for="letter" class="form-label">Authorized Letter</span></label>
+                <input type="file" class="form-control" id="letter" name="letter" accept=".pdf,.jpg,.jpeg,.png" required>
+            </div>
+
+            <div class="mb-3">
+            <label for="approver" class="form-label">Approver</label>
+            <select class="form-select" id="approver" name="approver" required>
+                <option value="">Select approver</option>
+                <option value="gokul.jha@nepallife.com.np">Gokul Jha</option>
+                <option value="suraj.chapagain@nepallife.com.np">Suraj Chapagain</option>
+            </select>
+            </div>
+            <button type="submit" class="btn btn-success px-5">Submit</button>
+        </form>
+</div>
+{% endblock %}
