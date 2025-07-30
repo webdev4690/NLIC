@@ -19,14 +19,13 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.expenses') }}">IT Expenses</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.product') }}">Product Request</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('views.support') }}">Support</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.assets') }}">Assets</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.logs') }}">Daily Logs</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -41,7 +40,7 @@
         setTimeout(() => {
             const alerts = document.querySelectorAll('.alert');
             alerts.forEach(alert => alert.classList.remove('show'));
-        }, 5000);
+        }, 3000);
         </script>
 
         {% block content %}
