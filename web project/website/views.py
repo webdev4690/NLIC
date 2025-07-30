@@ -9,7 +9,7 @@ from website.utils import get_branches_from_excel, get_assets_from_csv, get_issu
 UPLOAD_FOLDER = 'static/uploads/'
 views = Blueprint('views', __name__)
 
-@views.route('/')
+@views.route('/home')
 def home():
     return render_template('home.html')
 
