@@ -10,21 +10,43 @@
 </head>
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url_for('views.home') }}">Nepal Life Insurance IT Portal</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('views.home') }}">Nepal Life Insurance IT Portal</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="nav-link text-white">
+                            {{ current_user.username }} ({{ current_user.role }})
+                        </span>
+                    </li>
+
+                    {% if current_user.role == 'admin' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('admin.admin_dashboard') }}">Admin Dashboard</a>
+                        </li>
+                    {% endif %}
+
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.expenses') }}">IT Expenses</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.product') }}">Product Request</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.assets') }}">Assets</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('views.logs') }}">Daily Logs</a></li>
-                </ul>
-            </div>
+
+                    <li class="nav-item">
+                        <form method="POST" action="{{ url_for('auth.logout') }}">
+                            <button type="submit" class="btn btn-outline-light btn-sm nav-link border-0">Logout</button>
+                        </form>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
     <div class="container-fluid mt-4">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

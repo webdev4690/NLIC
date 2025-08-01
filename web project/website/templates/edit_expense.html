@@ -37,9 +37,11 @@
             <div class="mb-3">
             <label for="approver" class="form-label">Approver</label>
             <select class="form-select" id="approver" name="approver" required>
-                <option value="{{ expense.approver }}">{{ expense.approver }}</option>
-                <option value="gokul.jha@nepallife.com.np">Gokul Jha</option>
-                <option value="suraj.chapagain@nepallife.com.np">Suraj Chapagain</option>
+                {% for email, name in approver_names.items() %}
+                <option value="{{ email }}" {% if expense.approver == email %}selected{% endif %}>
+                {{ name }}
+                 </option>
+                {% endfor %}
             </select>
             </div>
 

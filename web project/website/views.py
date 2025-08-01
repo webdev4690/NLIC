@@ -4,20 +4,24 @@ import os
 from datetime import datetime
 from .models import AssetRequest, ExpenseRequest, DailyLogs
 from . import db
-from website.utils import get_branches_from_excel, get_assets_from_csv, get_issue_from_excel
+from website.utils import get_branches_from_excel, get_assets_from_csv, get_issue_from_excel, role_required
+from flask_login import login_required
 
 UPLOAD_FOLDER = 'static/uploads/'
 views = Blueprint('views', __name__)
 
 @views.route('/home')
+@login_required
+@role_required('user', 'admin')
 def home():
     return render_template('home.html')
 
 @views.route('/Expenses', methods=['GET', 'POST'])
+@login_required
+@role_required('user', 'admin')
 def expenses():
     branches = get_branches_from_excel()
     assets = get_assets_from_csv()
-
     if request.method == 'POST':
         branch = request.form.get('branch')
         item = request.form.get('item')
@@ -54,6 +58,8 @@ def expenses():
     return render_template('expenses.html', branches=branches, assets=assets)
 
 @views.route('/New_Product', methods=['GET', 'POST'])
+@login_required
+@role_required('user', 'admin')
 def product():
     branches = get_branches_from_excel()
     if request.method == 'POST':
@@ -97,16 +103,15 @@ def product():
 
     return render_template('new_product.html', branches=branches)
 
-
-@views.route('/Support')
-def support():
-    return render_template('support.html')
-
 @views.route('/Assets')
+@login_required
+@role_required('user', 'admin')
 def assets():
     return render_template('assets.html')
 
 @views.route('/Logs', methods=['GET', 'POST'])
+@login_required
+@role_required('user', 'admin')
 def logs():
     branches = get_branches_from_excel()
     issues = get_issue_from_excel()
