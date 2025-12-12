@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Page Under Construction{% endblock %}
+
+{% block content %}
+<div class="text-center my-5">
+    <h1 class="display-4">🚧 Page Under Construction 🚧</h1>
+    <p class="lead mt-3">We're working hard to bring this page to life. Please check back soon!</p>
+    <br>
+    <a href="{{ url_for('views.home') }}" class="btn btn-primary mt-3">Back to Home</a>
+</div>
+{% endblock %}

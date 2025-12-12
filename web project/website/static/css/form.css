@@ -1,0 +1,41 @@
+.asset-form {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+}
+
+.asset-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.asset-form .form-label {
+    font-weight: 600;
+    color: #444;
+}
+
+.asset-form .form-control,
+.asset-form .form-select {
+    padding: 10px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+}
+
+.asset-form .form-control:focus,
+.asset-form .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+}
+
+.asset-form button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+}

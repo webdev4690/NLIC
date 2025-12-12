@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Expense Requests{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 text-center display-4 fw-bold">IT Expense Requests</h2>
+
+
+{% if expenses %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Branch</th>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Expense Month</th>
+                <th>Approver</th>
+                <th>Letter</th>
+                <th>Date Submitted</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.id }}</td>
+                <td>{{ expense.branch }}</td>
+                <td>{{ expense.item }}</td>
+                <td>{{ expense.description }}</td>
+                <td>Rs. {{ '{:,.2f}'.format(expense.amount) }}</td>
+                <td>{{ expense.expense_month or 'N/A' }}</td>
+                <td>{{ expense.approver }}</td>
+                <td>
+                    <a href="{{ url_for('static', filename='uploads/' ~ expense.letter_filename) }}" target="_blank">
+                        View Letter
+                    </a>
+                </td>
+                <td>{{ expense.date_submitted.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td class="text-center align-middle">
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="{{ url_for('admin.edit_expense', expense_id=expense.id) }}" class="btn btn-warning px-4">Edit</a>
+                    <form method="POST" action="{{ url_for('admin.delete_expense', expense_id=expense.id) }}" onsubmit="return confirm('Are you sure you want to delete this expense?');">
+                    <button type="submit" class="btn btn-danger px-4">Delete</button>
+                    </form>
+                </div>
+                </td>
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No expense requests found.</p>
+{% endif %}
+{% endblock %}
